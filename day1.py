@@ -165,7 +165,7 @@ def F_day1part2_p2(v_number_array):
 
 # run code for day1 part 2
 def F_day1part2():
-    v_data = F_day1p1("data_dag2.txt")                # read data
+    v_data = F_day1p1("data_dag1.txt")                # read data
     v_new_data = F_day1part2_p1(v_data)               # transform
     v_new_data_numbers = F_day1part2_p2(v_new_data)   # extract first and last number
     v_answer = F_day1p3(v_new_data_numbers)           # sum the array
@@ -173,7 +173,7 @@ def F_day1part2():
     #     print(f'{v_data[v_i]}\t{v_new_data[v_i]}\t{v_new_data_numbers[v_i]}')
     return v_answer
 
-print("answer: " + str(F_day1part2()))
+print("answer: " + str(F_day1part2())) # 53519 is wrong..
 
 
 
