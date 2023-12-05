@@ -162,15 +162,10 @@ def F_day2_part2_lowest_nr_per_color(v_marbles_drawnlist):
             if "blue" in v_draw_data:
                 if int(v_draw_data["blue"]) > v_bluecount:
                     v_bluecount = int(v_draw_data["blue"])
-            # if v_redcount == 100: # maybe a bit weird. but make them 1 and they wont effect the answer
-            #     v_redcount = 1
-            # if v_greencount == 100:
-            #     v_greencount = 1
-            # if v_bluecount == 100:
-            #     v_bluecount = 1
         v_totallist.append([v_redcount,v_greencount,v_bluecount])
     return v_totallist
 
+# sum array
 def F_sum_array(v_array_in_array):       # [[1,2,3],[2,2,2],[3,3,2]]
     v_total = 0
     for v_lowestnrs in v_array_in_array: # [1,2,3]
