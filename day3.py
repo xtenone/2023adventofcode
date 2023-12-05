@@ -130,6 +130,93 @@ def F_find_numbers(v_data):
                 
 
 
+
+
+
+#=======================================================================================================
+# part2
+#=======================================================================================================
+
+def start2():
+     v_datafile = F_loadfile("data_dag3_test2.txt")
+     F_answer_part2(v_datafile)
+
+
+#=======================================================================================================
+
+def F_answer_part2(v_data):
+    # ...798...145....
+    # ...*..*..&...*..
+    # ..459..489.817..
+    # ...798...145....
+    v_copy_array_counters = []
+    v_copy_array_numbers = []
+    v_counter = 0
+
+    v_search_pattern = r'[0-9]*'
+    for v_i, v_line in enumerate(v_data): #ex. '467..114.....*......'
+
+    # [0, 0, 0, 1, 1, 1, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0]
+    # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    # [0, 0, 3, 3, 3, 0, 0, 4, 4, 4, 0, 5, 5, 5, 0, 0, 0]
+    # [0, 0, 0, 6, 6, 6, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0]
+    # AND
+    # [798, 145, 459, 489, 817, 798, 145]
+        v_copy_array_counters.append([])
+        v_found_numbers = re.findall(v_search_pattern, v_line) # ['467..114..*.'] --> ['467', '', '', '114', '', '', '', '', '']
+        for v_nr in v_found_numbers:
+            if v_nr == '':
+                v_copy_array_counters[v_i].append(0)
+            else:
+                v_copy_array_numbers.append(int(v_nr))            # ['467', '', '', '114', '', '', '', '', ''] --> [467, 114]]
+                v_counter+=1
+                for v_char in v_nr:
+                    v_copy_array_counters[v_i].append(v_counter)  # ['467', '', '', '114', '', '', '', '', ''] --> [1,1,1, 0, 0, 2,2,2, 0, 0, 0, 0, 0]
+        # print(v_copy_array_counters[v_i])
+
+    # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    # [0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0]
+    # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    v_copy_array_icons_places = []
+    v_search_pattern = r'[*]*'
+    for v_i, v_line in enumerate(v_data): #ex. '467..114.....*......'
+        # ['467', '', '', '114', '', '', '', '', ''] --> [467, 114]]
+        v_copy_array_icons_places.append([])
+        v_found_icons = re.findall(v_search_pattern, v_line) # ['467..114..*.'] --> ['467', '', '', '114', '', '', '', '', '']
+        for v_nr in v_found_icons:
+            if v_nr == '':
+                v_copy_array_icons_places[v_i].append(0)
+            else:
+                v_copy_array_icons_places[v_i].append(2)
+        # print(v_copy_array_icons_places[v_i])
+
+    # [[1, 3], [1, 4], [5]]
+    v_nums_around_gear = []
+    v_count = -1
+    for v_y, v_line in enumerate(v_copy_array_icons_places):
+        for v_x, v_digid in enumerate(v_line):
+            if v_digid == 2:
+                v_nums_around_gear.append([])
+                v_count+=1
+                for v_i1 in [-1,0,1]:
+                    for v_i2 in [-1,0,1]:
+                        v_numaround = v_copy_array_counters[v_y+v_i1][v_x+v_i2]
+                        if v_numaround != 0:
+                            v_nums_around_gear[v_count].append(v_numaround)
+                v_nums_around_gear[v_count] = list(set(v_nums_around_gear[v_count])) # remove doubles
+                # print(v_nums_around_gear[v_count])
+    
+    # [70905, 118465] <-- 798*459, 798*489
+    v_gear_ratios = []
+    for v_around_gear in v_nums_around_gear:
+                if len(v_around_gear)==2:
+                    v_gear_ratios.append(v_copy_array_numbers[v_around_gear[0]-1]*v_copy_array_numbers[v_around_gear[1]-1])
+    # print(v_gear_ratios)
+
+    # 189370
+    v_answer2 = sum(v_gear_ratios)
+    print(v_answer2)
            
             
 
@@ -162,3 +249,4 @@ def F_find_numbers(v_data):
 
 
 start()
+start2()
