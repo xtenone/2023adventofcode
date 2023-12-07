@@ -50,6 +50,20 @@ print("day1")
 print("================================================================================================")
 print()
 
+
+# this is the complete code for part1, same as the code below, but in functions
+# with open(v_filename, 'r') as file:
+#     v_data_dag1 = [line.strip() for line in file]
+# v_number_array = []
+# for v_i in range(len(v_data_dag1)):
+#     match1 = re.search("[1-9]",v_data_dag1[v_i])
+#     match2 = re.search("[1-9]",v_data_dag1[v_i][::-1])
+#     v_number_array.append(int(str(match1.group())+""+str(match2.group())))
+# v_answer_dag1 = sum(v_number_array) # sum them with the total
+
+
+
+
 # part 1: get data from file
 def F_day1p1(v_filename):
     with open(v_filename, 'r') as file:
@@ -169,8 +183,8 @@ def F_day1part2():
     v_new_data = F_day1part2_p1(v_data)               # transform
     v_new_data_numbers = F_day1part2_p2(v_new_data)   # extract first and last number
     v_answer = F_day1p3(v_new_data_numbers)           # sum the array
-    # for v_i in range(len(v_data)):
-    #     print(f'{v_data[v_i]}\t{v_new_data[v_i]}\t{v_new_data_numbers[v_i]}')
+    for v_i in range(len(v_data)):
+      print(f'{v_data[v_i]}\t{v_new_data[v_i]}\t{v_new_data_numbers[v_i]}')
     return v_answer
 
 print("answer: " + str(F_day1part2())) # 53519 is wrong..
