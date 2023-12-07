@@ -50,6 +50,20 @@ print("day1")
 print("================================================================================================")
 print()
 
+
+# this is the complete code for part1, same as the code below, but in functions
+# with open(v_filename, 'r') as file:
+#     v_data_dag1 = [line.strip() for line in file]
+# v_number_array = []
+# for v_i in range(len(v_data_dag1)):
+#     match1 = re.search("[1-9]",v_data_dag1[v_i])
+#     match2 = re.search("[1-9]",v_data_dag1[v_i][::-1])
+#     v_number_array.append(int(str(match1.group())+""+str(match2.group())))
+# v_answer_dag1 = sum(v_number_array) # sum them with the total
+
+
+
+
 # part 1: get data from file
 def F_day1p1(v_filename):
     with open(v_filename, 'r') as file:
