@@ -133,7 +133,7 @@ print()
 def F_day1part2_p1(v_data):
     # prepare needed arrays with digits
     v_words = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-    v_search_pattern = r'[1-9]|one|two|three|four|five|six|seven|eight|nine'
+    v_search_pattern = r'(?=(one|two|three|four|five|six|seven|eight|nine|[1-9]))'
 
     #regular expresion search again, get array with all numbers
     # ex. 4nineeightseven2 --> ['4','nine','eight','seven','2']
@@ -169,8 +169,8 @@ def F_day1part2():
     v_new_data = F_day1part2_p1(v_data)               # transform
     v_new_data_numbers = F_day1part2_p2(v_new_data)   # extract first and last number
     v_answer = F_day1p3(v_new_data_numbers)           # sum the array
-    # for v_i in range(len(v_data)):
-    #     print(f'{v_data[v_i]}\t{v_new_data[v_i]}\t{v_new_data_numbers[v_i]}')
+    for v_i in range(len(v_data)):
+        print(f'{v_data[v_i]}\t{v_new_data[v_i]}\t{v_new_data_numbers[v_i]}')
     return v_answer
 
 print("answer: " + str(F_day1part2())) # 53519 is wrong..
