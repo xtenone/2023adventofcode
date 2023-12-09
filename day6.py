@@ -3,7 +3,7 @@
 # this seems to be an easy puzzle...
 # d=((T-x)*x)=Tx-x² is the forula... wherer T=Time, x=Thold dont mind the units..
 # so 0=x²-Tx+d.. 2nd order equation.. (x-½T)(x-½T)-¼T²+d=0.. x= +-sqr(¼T²-d)+½T²
-# so the different options are x = +(sqr(¼T²-d)+½T²) - (-sqr(¼T²-d)+½T²)=2*sqr(¼T²-d)
+# so the different options are x = +(sqr(¼T²-d)+½T²) - (-sqr(¼T²-d)+½T²)= 2*sqr(¼T²-d)
 
 import re
 
@@ -58,16 +58,19 @@ v_ways = []
 for v_i1, v_time in enumerate(v_times):
 
     # ok nice, but how to do this with integers? lets do it more stupid.
-    # print(2*math.sqrt(v_time*v_time*0.25 - v_distances[v_i]))
-    # print(math.floor(math.sqrt(v_time*v_time*0.25 - v_distances[v_i]) + 0.25*v_time*v_time) - math.floor(-math.sqrt(v_time*v_time*0.25 - v_distances[v_i]) + 0.25*v_time*v_time))
-
-    v_beattherecord = 0
-    for v_timecount in range(v_time): #(Tx-x²)
-        v_disntance_compared = v_distances[v_i1]-(v_time*v_timecount-v_timecount*v_timecount)
-        # print(v_disntance_compared)
-        if v_disntance_compared < 0:
-            v_beattherecord += 1
+    # print(2*math.sqrt(v_time*v_time*0.25 - v_distances[v_i1] - 0.01))
+    v_needtobebigger = 0.01 # equal times arent good enough. you need to be faster!! 1/100th milisecond faster is enough though..
+    v_beattherecord = math.floor(math.sqrt(v_time*v_time*0.25 - v_distances[v_i1] - v_needtobebigger) + 0.25*v_time*v_time) - math.floor(-math.sqrt(v_time*v_time*0.25 - v_distances[v_i1] - v_needtobebigger) + 0.25*v_time*v_time)
+    print(v_beattherecord)
     v_ways.append(v_beattherecord)
+
+    # v_beattherecord = 0
+    # for v_timecount in range(v_time): #d-(Tx-x²)
+    #     v_disntance_compared = v_distances[v_i1]-(v_time*v_timecount-v_timecount*v_timecount)
+    #     # print(v_disntance_compared)
+    #     if v_disntance_compared < 0:
+    #         v_beattherecord += 1
+    # v_ways.append(v_beattherecord)
 
 print(v_ways)
 
